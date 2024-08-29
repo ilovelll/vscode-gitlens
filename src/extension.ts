@@ -116,7 +116,7 @@ export async function activate(context: ExtensionContext): Promise<GitLensApi | 
 		const date = new Date(v.major, v.minor - 1, Number(v.patch.toString().substring(0, 2)));
 
 		// If the build date is older than 14 days then show the expired error message
-		if (date.getTime() < Date.now() - 14 * 24 * 60 * 60 * 1000) {
+		if (false && date.getTime() < Date.now() - 14 * 24 * 60 * 60 * 1000) {
 			sw.stop({
 				message: ` was NOT activated because this pre-release version (${gitlensVersion}) has expired`,
 			});
