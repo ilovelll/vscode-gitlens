@@ -109,24 +109,6 @@ export async function activate(context: ExtensionContext): Promise<GitLensApi | 
 		},
 	});
 
-	// Ensure that this pre-release version hasn't expired
-	if (prerelease) {
-		const v = fromString(gitlensVersion);
-		// Get the build date from the version number
-		const date = new Date(v.major, v.minor - 1, Number(v.patch.toString().substring(0, 2)));
-
-		// If the build date is older than 14 days then show the expired error message
-		if (false && date.getTime() < Date.now() - 14 * 24 * 60 * 60 * 1000) {
-			sw.stop({
-				message: ` was NOT activated because this pre-release version (${gitlensVersion}) has expired`,
-			});
-
-			// If we don't use a setTimeout here this notification will get lost for some reason
-			setTimeout(showPreReleaseExpiredErrorMessage, 0, gitlensVersion);
-
-			return undefined;
-		}
-	}
 
 	if (!workspace.isTrusted) {
 		void setContext('gitlens:untrusted', true);
