@@ -1174,7 +1174,7 @@ export class SubscriptionService implements Disposable {
 			};
 		}
 
-		subscription.state = computeSubscriptionState(subscription);
+		subscription.state = SubscriptionState.Paid;
 		assertSubscriptionState(subscription);
 
 		const promo = getApplicablePromo(subscription.state);
